@@ -1,7 +1,6 @@
 frameworkVersion: '3'
 org: kylepls
-service: kylepls-site-diff
-app: kylepls-site-diff
+service: kylepls2-site-diff
 
 provider:
   name: aws
@@ -17,6 +16,11 @@ functions:
     handler: index.run
     memorySize: 1024
     timeout: 15
+    layers:
+      # Google Chrome for AWS Lambda as a layer
+      # Make sure you use the latest version depending on the region
+      # https://github.com/shelfio/chrome-aws-lambda-layer
+      - arn:aws:lambda:${self:provider.region}:764866452798:layer:chrome-aws-lambda:10
 
     events:
       - schedule: rate(15 minutes)

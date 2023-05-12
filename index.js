@@ -20,15 +20,14 @@ const ses = new SESClient({region: REGION});
 export const run = async () => {
     try {
         // Launch Puppeteer
-        const browser = await chromium.puppeteer
-            .launch({
-                args: chromium.args,
-                defaultViewport: chromium.defaultViewport,
-                executablePath: await chromium.executablePath,
-                headless: chromium.headless
-            });
-
+        const browser = await chromium.puppeteer.launch({
+            args: chromium.args,
+            defaultViewport: chromium.defaultViewport,
+            executablePath: await chromium.executablePath,
+            headless: true
+        });
         const page = await browser.newPage();
+        await page.setViewport({width: 800, height: 800});
 
         // Navigate to the website
         const url = new URL(TARGET_URL).toString();
@@ -97,8 +96,7 @@ async function getPreviousScreenshot() {
             Key: LAST_IMAGE_KEY,
         };
         const data = await s3.send(new GetObjectCommand(params));
-        const lastScreenshot = await streamToBuffer(data.Body);
-        return lastScreenshot;
+        return await streamToBuffer(data.Body);
     } catch (error) {
         // Return a blank image if the previous screenshot doesn't exist
         return null
