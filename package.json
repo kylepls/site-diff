@@ -1,0 +1,17 @@
+{
+  "name": "kylepls-site-diff",
+  "version": "1.0.0",
+  "description": "Example of creating a function that runs as a cron job using the serverless `schedule` event",
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.332.0",
+    "@aws-sdk/client-ses": "^3.332.0",
+    "aws-sdk": "^2.1377.0",
+    "chrome-aws-lambda": "^10.1.0",
+    "moment-timezone": "^0.5.43",
+    "puppeteer-core": "^10.4.0",
+    "resemblejs": "^4.1.0"
+  }
+}

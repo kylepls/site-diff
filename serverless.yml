@@ -1,0 +1,22 @@
+frameworkVersion: '3'
+org: kylepls
+service: kylepls-site-diff
+app: kylepls-site-diff
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action: 'ses:SendEmail'
+      Resource: "arn:aws:ses:us-east-1:088327297714:identity/mail@kyle.in"
+
+functions:
+  rateHandler:
+    handler: index.run
+    memorySize: 1024
+    timeout: 15
+
+    events:
+      - schedule: rate(15 minutes)
